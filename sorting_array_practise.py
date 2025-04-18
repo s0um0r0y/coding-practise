@@ -1,4 +1,13 @@
-from typing import List
+from typing import List, Optional
+from dataclasses import dataclass
+
+@dataclass
+class ArrayInput:
+	'''
+	Dataclass to hold the inout array
+	'''
+	my_array: List[int] 
+	n: int
 
 class ArraySorter():
 	def __init__(self,my_array):
@@ -38,6 +47,8 @@ class ArraySorter():
 			if not swapped:
 				break
 		return self.my_array
+	
+	
 
 if __name__ == "__main__":
 	my_array = [64, 25, 12, 22, 11]
