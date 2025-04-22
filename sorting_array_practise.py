@@ -2,15 +2,15 @@ from typing import List, Optional
 from dataclasses import dataclass
 
 @dataclass
-class ArrayInput:
+class ArrayInput():
 	'''
-	Dataclass to hold the inout array
+	Dataclass to hold the input array
 	'''
 	my_array: List[int] 
 	n: int
 
 class ArraySorter():
-	def __init__(self,my_array):
+	def __init__(self,my_array: List[int], n: Optional[int] = None):
 		self.my_array = my_array.copy()
 		self.n = len(my_array)
 
@@ -48,14 +48,30 @@ class ArraySorter():
 				break
 		return self.my_array
 	
+	def insertion_sort_array(self) -> List[int]:
+		'''
+		Insertion sort
+		input:
+			array of integers
+		return:
+			sorted array of integers
+		'''
+		for i in range(1, self.n):
+			insert_index = i
+			current_value = self.my_array.pop(i)
+			for j in range(i-1, -1 ,-1):
+				if self.my_array[j] > current_value:
+					insert_index = j
+			self.my_array.insert(insert_index, current_value)
+		return self.my_array
 	
 
 if __name__ == "__main__":
 	my_array = [64, 25, 12, 22, 11]
-	array_sorter = ArraySorter(my_array)
+	array_sorter = ArraySorter(my_array, len(my_array))
 	sorted_array_selection = array_sorter.selection_sort_array()
 	print("selection sort : ",sorted_array_selection)
 	sorted_array_bubble = array_sorter.bubble_sort_array()
 	print("bubble_sort : ",sorted_array_bubble)
-
-
+	sorted_array_insertion = array_sorter.insertion_sort_array()
+	print("insertion_sort : ",sorted_array_insertion)
