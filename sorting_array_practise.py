@@ -65,7 +65,38 @@ class ArraySorter():
 			self.my_array.insert(insert_index, current_value)
 		return self.my_array
 	
+	def quick_sort_array(self) -> List[int]:
+		'''
+		Quick sort
+		input:
+			array of integers
+		return:
+			sorted array of integers
+		'''
+		def partition(low: int , high: int) -> int:
+			pivot = self.my_array[high]
+			i = low -1
 
+			for j in range(low, high):
+				if self.my_array[j] < pivot:
+					i += 1
+					self.my_array[i], self.my_array[j] = self.my_array[j], self.my_array[i]
+
+			self.my_array[i+1] , self.my_array[high] = self.my_array[high], self.my_array[i+1]
+			return i+1
+		
+		def quick_sort(low: int, high: int):
+			if high is None:
+				high = self.n -1
+			
+			if low < high:
+				pivot_index = partition(low, high)
+				quick_sort(low, pivot_index-1)
+				quick_sort(pivot_index+1, high)
+
+		quick_sort(0, self.n-1)
+		return self.my_array
+		
 if __name__ == "__main__":
 	my_array = [64, 25, 12, 22, 11]
 	array_sorter = ArraySorter(my_array, len(my_array))
@@ -75,3 +106,5 @@ if __name__ == "__main__":
 	print("bubble_sort : ",sorted_array_bubble)
 	sorted_array_insertion = array_sorter.insertion_sort_array()
 	print("insertion_sort : ",sorted_array_insertion)
+	sorted_array_quick = array_sorter.quick_sort_array()
+	print("quick_sort : ",sorted_array_quick)
