@@ -96,6 +96,28 @@ class ArraySorter():
 
 		quick_sort(0, self.n-1)
 		return self.my_array
+	
+	def counting_sort_array(self) -> List[int]:
+		'''
+		Counting sort
+		input:
+			array of integers
+		return:
+			sorted array of integers
+		'''
+		max_val = max(self.my_array)
+		count = [0] * (max_val + 1)
+
+		while len(self.my_array) > 0 :
+			num = self.my_array.pop(0)
+			count[num] += 1
+
+		for i in range(len(count)):
+			while count[i] > 0:
+				self.my_array.append(i)
+				count[i] -= 1
+		
+		return self.my_array
 		
 if __name__ == "__main__":
 	my_array = [64, 25, 12, 22, 11]
@@ -103,8 +125,11 @@ if __name__ == "__main__":
 	sorted_array_selection = array_sorter.selection_sort_array()
 	print("selection sort : ",sorted_array_selection)
 	sorted_array_bubble = array_sorter.bubble_sort_array()
-	print("bubble_sort : ",sorted_array_bubble)
+	print("bubble sort : ",sorted_array_bubble)
 	sorted_array_insertion = array_sorter.insertion_sort_array()
-	print("insertion_sort : ",sorted_array_insertion)
+	print("insertion sort : ",sorted_array_insertion)
 	sorted_array_quick = array_sorter.quick_sort_array()
-	print("quick_sort : ",sorted_array_quick)
+	print("quick sort : ",sorted_array_quick)
+	sorted_array_counting = array_sorter.counting_sort_array()
+	print("counting sort : ",sorted_array_counting)
+
