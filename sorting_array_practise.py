@@ -118,6 +118,74 @@ class ArraySorter():
 				count[i] -= 1
 		
 		return self.my_array
+	
+	def radix_sort_array(self) -> List[int]:
+		'''
+		Radix sort
+		input:
+			array of integers
+		return:
+			sorted array of integers
+		'''
+		radixArray: List[List[int]] = [[],[],[],[],[],[],[],[],[],[]]
+		maxVal = max(self.my_array)
+		exp = 1
+
+		while maxVal // exp > 0:
+			while len(self.my_array) > 0:
+				val = self.my_array.pop()
+				radixIndex = (val // exp) % 10
+				radixArray[radixIndex].append(val)
+
+			for bucket in radixArray:
+				while len(bucket) > 0:
+					val = bucket.pop()
+					self.my_array.append(val)
+
+			exp *= 10
+
+		return self.my_array
+
+	def merge_sort_array(self) -> List[int]:
+		'''
+		Merge sort
+		input:
+			array of integers
+		return:
+			sorted array of integers
+		'''
+		def mergeSort(my_array):
+			if len(my_array) <= 1:
+				return my_array
+			
+			mid = len(my_array) // 2
+			leftHalf = my_array[:mid]
+			rightHalf = my_array[mid:]
+
+			sortedLeft = mergeSort(leftHalf)
+			sortedRight = mergeSort(rightHalf)
+
+			return merge(sortedLeft,sortedRight)
+	
+		def merge(left, right):
+			result = []
+			i = j = 0
+
+			while i < len(left) and j < len(right):
+				if left[i] < right[j]:
+					result.append(left[i])
+					i += 1
+				else:
+					result.append(right[j])
+					j += 1
+
+			result.extend(left[i:])
+			result.extend(right[j:])
+
+			return result
+		
+		return mergeSort(self.my_array)
+
 		
 if __name__ == "__main__":
 	my_array = [64, 25, 12, 22, 11]
@@ -132,4 +200,8 @@ if __name__ == "__main__":
 	print("quick sort : ",sorted_array_quick)
 	sorted_array_counting = array_sorter.counting_sort_array()
 	print("counting sort : ",sorted_array_counting)
+	sorted_array_radix = array_sorter.radix_sort_array()
+	print("radix sort : ",sorted_array_radix)
+	sorted_array_merge = array_sorter.merge_sort_array()
+	print("merge sort : ",sorted_array_merge)
 
