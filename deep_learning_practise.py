@@ -16,7 +16,7 @@ end = 1
 step = 0.02
 
 # Create X and y (feature labels)
-X = torch.arange(start, end, step).unsqeeze(dim=1)
+X = torch.arange(start, end, step).unsqueeze(dim=1)
 y = weight * X + bias
 
 # split data
@@ -90,6 +90,9 @@ for epoch in range(epochs):
     if epochs % 100 == 0:
         print(f"Epochs: {epoch} | Train loss: {loss} | Test loss: {test_loss}")
 
+# Turn model into evaluation mdoe
+model_1.eval()
+
 if __name__ == "__main__":
     # Find our model's learned parameters
     from pprint import pprint # pprint = pretty print, see: https://docs.python.org/3/library/pprint.html 
@@ -97,3 +100,6 @@ if __name__ == "__main__":
     pprint(model_1.state_dict())
     print("\nAnd the original values for weights and bias are:")
     print(f"weights: {weight}, bias: {bias}")
+
+    with torch.inference_mode():
+        y_pred = model_1(X_test)
