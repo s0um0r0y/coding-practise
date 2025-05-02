@@ -79,3 +79,39 @@ class linkedList():
 
         self.node4.prev = next.node3
         self.node4.next = next.node1
+
+    def traverse_and_print(self, head):
+        currentNode = head
+        while currentNode:
+            print(currentNode.data, end="-> ")
+            currentNode = currentNode.next
+        print("null")
+
+    def delete_specific_node(self, head, node_to_delete):
+        if head == node_to_delete:
+            return head.next
+        
+        currentNode = head
+        while currentNode.next and currentNode.next != node_to_delete:
+            currentNode = currentNode.next
+
+        currentNode.next = currentNode.next.next
+
+        return head
+    
+    def insert_node_at_position(self, head, new_node, position):
+        if position == 1:
+            new_node.next = head
+            return new_node
+        
+        current_node = head
+        for _ in range(position - 2):
+            if current_node is None:
+                break
+            current_node = current_node.next
+
+        new_node.next = current_node.next
+        current_node.next = new_node
+        return head
+    
+     
