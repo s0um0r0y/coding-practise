@@ -54,3 +54,20 @@ print(f"y_test shape: {y_test.shape}")
 # Make device agnostic code
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
+# X -> input feature y -> label
+
+# 1. Construct a model class that subclasses the nn>Module
+class CircleModelV0(nn.Module):
+    def __init__(self):
+        super().__init__()
+        # 2. Create 2 nn.linear layers capable of handling X and y input and output shapes
+        self.layer_1 = nn.Linear(in_features=2, out_features=5)
+        self.layer_2 = nn.Linear(in_features=5, out_features=1)
+
+    # 3. define the forward method
+    def forward(self, x):
+        # return the output of layer_2, a single feature,the same feature as y
+        return self.layer_2(self.layer_1(x))
+
+# 4. Instantiate the model and then send it to the target device
+model_0 = CircleModelV0().to(device)
