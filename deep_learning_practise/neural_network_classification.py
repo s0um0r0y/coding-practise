@@ -71,3 +71,16 @@ class CircleModelV0(nn.Module):
 
 # 4. Instantiate the model and then send it to the target device
 model_0 = CircleModelV0().to(device)
+
+# trying with nn.Sequential
+model_0 = nn.Sequential(
+    nn.Linear(in_features=2, out_features=5),
+    nn.Linear(in_features=5, out_features=1)
+).to(device)
+
+# Make predictions with the model
+untrained_preds = model_0(X_test.to(device))
+print(f"Length of predictions: {len(untrained_preds)}, Shape: {untrained_preds.shape}")
+print(f"Length of test samples: {len(y_test)}, Shape: {y_test.shape}")
+print(f"\nFirst 10 predictions:\n{untrained_preds[:10]}")
+print(f"\nFirst 10 test labels:\n{y_test[:10]}")
