@@ -84,3 +84,18 @@ print(f"Length of predictions: {len(untrained_preds)}, Shape: {untrained_preds.s
 print(f"Length of test samples: {len(y_test)}, Shape: {y_test.shape}")
 print(f"\nFirst 10 predictions:\n{untrained_preds[:10]}")
 print(f"\nFirst 10 test labels:\n{y_test[:10]}")
+
+# 5. create a loss function
+# with sigmoid built in
+loss_fn = nn.BCEWithLogitsLoss()
+
+# 6. create an optimizer
+optimizer = torch.optim.SGD(params=model_0.parameters(),
+                            lr=0.1)
+
+# writing an accuracy function
+def accuracy_fn(y_true, y_pred):
+    # calculates where two tensors are equal
+    correct = torch.eq(y_true, y_pred).sum().item()
+    acc = (correct / len(y_pred)) * 100
+    return acc
