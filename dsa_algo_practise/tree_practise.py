@@ -11,6 +11,13 @@ class TreeNode:
         self.preOrderTraversal(node.left)
         self.preOrderTraversal(node.right)
 
+    def inOrderTraversal(self, node):
+        if node is None:
+            return
+        self.inOrderTraversal(node.left)
+        print(node.data, end=", ")
+        self.inOrderTraversal(node.right)
+
 root = TreeNode('R')
 nodeA = TreeNode('A')
 nodeB = TreeNode('B')
