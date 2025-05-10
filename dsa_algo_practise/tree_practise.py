@@ -18,6 +18,13 @@ class TreeNode:
         print(node.data, end=", ")
         self.inOrderTraversal(node.right)
 
+    def postOrderTraversal(self,node):
+        if node is None:
+            return
+        self.postOrderTraversal(node.left)
+        self.postOrderTraversal(node.right)
+        print(node.data, end=", ")
+
 root = TreeNode('R')
 nodeA = TreeNode('A')
 nodeB = TreeNode('B')
