@@ -24,25 +24,37 @@ class TreeNode:
         self.postOrderTraversal(node.left)
         self.postOrderTraversal(node.right)
         print(node.data, end=", ")
+    
+    def left_child_index(self, index):
+        return 2 * index + 1
+    
+    def right_child_index(self, index):
+        return 2 * index + 2
+    
+    def get_data(self, index):
+        if 0 <= index < len(self.node):
+            return self.node[index]
 
-root = TreeNode('R')
-nodeA = TreeNode('A')
-nodeB = TreeNode('B')
-nodeC = TreeNode('C')
-nodeD = TreeNode('D')
-nodeE = TreeNode('E')
-nodeF = TreeNode('F')
-nodeG = TreeNode('G')
 
-root.left = nodeA
-root.right = nodeB
+if __name__ == "__main__":
+    root = TreeNode('R')
+    nodeA = TreeNode('A')
+    nodeB = TreeNode('B')
+    nodeC = TreeNode('C')
+    nodeD = TreeNode('D')
+    nodeE = TreeNode('E')
+    nodeF = TreeNode('F')
+    nodeG = TreeNode('G')
 
-nodeA.left = nodeC
-nodeA.right = nodeD
+    root.left = nodeA
+    root.right = nodeB
 
-nodeB.left = nodeE
-nodeB.right = nodeF
+    nodeA.left = nodeC
+    nodeA.right = nodeD
 
-nodeF.left = nodeG
+    nodeB.left = nodeE
+    nodeB.right = nodeF
 
-print("root.right.left.data:", root.right.left.data)
+    nodeF.left = nodeG
+
+    print("root.right.left.data:", root.right.left.data)
