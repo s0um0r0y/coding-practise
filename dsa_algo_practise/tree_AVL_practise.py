@@ -76,6 +76,12 @@ def inOrderTraversal(node):
     print(node.data, end= ", ")
     inOrderTraversal(node.right)
 
+def minValueNode(node):
+    current = node
+    while current.left is not None:
+        current = current.left
+    return current
+
 # Inserting nodes
 root = None
 letters = ['C', 'B', 'E', 'A', 'D', 'H', 'G', 'F']
