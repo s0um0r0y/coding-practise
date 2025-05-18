@@ -43,3 +43,20 @@ def insert(node, data):
         node.left = insert(node.left, data)
     elif data > node.data:
         node.right = insert(node.right, data)
+
+    # Update the balance factor and balance the tree
+    node.height = 1 + max(getHeight(node.left), getHeight(node.right))
+    balance = getBalance(node)
+
+    # Balancing the tree
+    # left left
+    if balance > 1 and getBalance(node.left) >= 0:
+        return rightRotate(node)
+    
+    # left right
+    if balance > 1 and getBalance(node.left) < 0:
+        node.left = leftRotate(node.left)
+        return rightRotate(node)
+    
+    # right right
+    
