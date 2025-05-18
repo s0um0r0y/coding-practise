@@ -59,4 +59,19 @@ def insert(node, data):
         return rightRotate(node)
     
     # right right
+    if balance < -1 and getBalance(node.right) <= 0:
+        return leftRotate(node)
     
+    # right left
+    if balance < -1 and getBalance(node.right) > 0:
+        node.right = rightRotate(node.right)
+        return leftRotate(node)
+    
+    return node
+
+def inOrderTraversal(node):
+    if node is None:
+        return
+    inOrderTraversal(node.left)
+    print(node.data, end= ", ")
+    inOrderTraversal(node.right)
