@@ -10,3 +10,36 @@ def getHeight(node):
         return 0
     return node.height
 
+def getBalance(node):
+    if not node:
+        return 0
+    return getHeight(node.left) - getHeight(node.right)
+
+def rightRotate(y):
+    print('rotate right on node', y.data)
+    x = y.left
+    T2 = x.right
+    x.right = y
+    y.left = T2
+    y.height = 1 + max(getHeight(y.left), getHeight(y.right))
+    x.height = 1 + max(getHeight(x.left), getHeight(x.right))
+    return x
+
+def leftRotate(x):
+    print('Rotate left on node',x.data)
+    y = x.right
+    T2 = y.left
+    y.left = x
+    x.right = T2
+    x.height = 1 + max(getHeight(x.left), getHeight(x.right))
+    y.height = 1 + max(getHeight(y.left), getHeight(y.right))
+    return y
+
+def insert(node, data):
+    if not node:
+        return TreeNode(data)
+    
+    if data < node.data:
+        node.left = insert(node.left, data)
+    elif data > node.data:
+        node.right = insert(node.right, data)
