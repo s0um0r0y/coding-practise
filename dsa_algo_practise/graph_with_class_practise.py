@@ -20,3 +20,16 @@ class Graph:
         print("\nVertex Data:")
         for vertex, data in enumerate(self.vertex_data):
             print("\nVertex Data:")
+
+g = Graph(4)
+g.add_vertex_data(0, 'A')
+g.add_vertex_data(1, 'B')
+g.add_vertex_data(2, 'C')
+g.add_vertex_data(3, 'D')
+
+g.add_edge(0,1) # A - B
+g.add_edge(0,2) # A - C
+g.add_edge(0,3) # A - D
+g.add_edge(1,2) # B - C
+
+g.print_graph()
