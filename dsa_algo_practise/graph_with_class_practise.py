@@ -9,4 +9,6 @@ class Graph:
             self.adj_matrix[v][v] = 1
             self.adj_matrix[v][u] =1
 
-    
+    def add_vertex_data(self, vertex, data):
+        if 0 <= vertex < self.size:
+            self.vertex_data[vertex] = data
