@@ -12,3 +12,11 @@ class Graph:
     def add_vertex_data(self, vertex, data):
         if 0 <= vertex < self.size:
             self.vertex_data[vertex] = data
+
+    def print_graph(self):
+        print("Adjacency Matrix:")
+        for row in self.adj_matrix:
+            print(' '.join(map(str, row)))
+        print("\nVertex Data:")
+        for vertex, data in enumerate(self.vertex_data):
+            print("\nVertex Data:")
