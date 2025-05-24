@@ -1,0 +1,11 @@
+# 1. goal
+duration time_to_wait
+---
+# 2. result
+duration time_elapsed
+# number of updates sent
+uint32 updates_sent
+---
+# 3. feedback
+duration time_elapsed
+duration time_remaining
