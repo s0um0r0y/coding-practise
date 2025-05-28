@@ -20,3 +20,42 @@ class Graph:
         print("\nVertex Data:")
         for vertex, data in enumerate(self.vertex_data):
             print(f"Vertex {vertex}: {data}")
+
+    # implementation of depth first search
+    def dfs_util(self, v, visited):
+        visited[v] = True
+        print(self.vertex_data[v], end=' ')
+
+        for i in range(self.size):
+            if self.adj_matrix[v][i] == 1 and not visited[i]:
+                self.dfs_util(i, visited)
+
+    def dfs(self, start_vertex_data):
+        visited = [False] * self.size
+        start_vertex = self.vertex_data.index(start_vertex_data)
+        self.dfs_util(start_vertex, visited)
+
+g = Graph(7)
+
+g.add_vertex_data(0, 'A')
+g.add_vertex_data(1, 'B')
+g.add_vertex_data(2, 'C')
+g.add_vertex_data(3, 'D')
+g.add_vertex_data(4, 'E')
+g.add_vertex_data(5, 'F')
+g.add_vertex_data(6, 'G')
+
+g.add_edge(3, 0)  # D - A
+g.add_edge(0, 2)  # A - C
+g.add_edge(0, 3)  # A - D
+g.add_edge(0, 4)  # A - E
+g.add_edge(4, 2)  # E - C
+g.add_edge(2, 5)  # C - F
+g.add_edge(2, 1)  # C - B
+g.add_edge(2, 6)  # C - G
+g.add_edge(1, 5)  # B - F
+
+g.print_graph()
+
+print("\nDepth First Search starting from vertex D:")
+g.dfs('D')
