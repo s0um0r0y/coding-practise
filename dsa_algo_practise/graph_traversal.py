@@ -7,7 +7,7 @@ class Graph:
     def add_edge(self, u, v):
         if 0<=u < self.size and 0 <= v < self.size:
             self.adj_matrix[u][v] = 1
-            self.adj_matrix[v][u] = 1
+            # self.adj_matrix[v][u] = 1
 
     def add_vertex_data(self, vertex, data):
         if 0 <= vertex < self.size:
@@ -35,6 +35,21 @@ class Graph:
         start_vertex = self.vertex_data.index(start_vertex_data)
         self.dfs_util(start_vertex, visited)
 
+    # implementation of breadth first search
+    def bfs(self, start_vertex_data):
+        queue = [self.vertex_data.index(start_vertex_data)]
+        visited = [False] * self.size
+        visited[queue[0]] = True
+
+        while queue:
+            current_vertex = queue.pop(0)
+            print(self.vertex_data[current_vertex], end=' ')
+
+            for i in range(self.size):
+                if self.adj_matrix[current_vertex][i] == 1 and not visited[i]:
+                    queue.append(i)
+                    visited[i] = True
+
 g = Graph(7)
 
 g.add_vertex_data(0, 'A')
@@ -59,3 +74,6 @@ g.print_graph()
 
 print("\nDepth First Search starting from vertex D:")
 g.dfs('D')
+
+print("\n\nBreadth First Search starting from vertex D:")
+g.bfs('D')
