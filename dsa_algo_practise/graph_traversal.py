@@ -22,7 +22,7 @@ class Graph:
             print(f"Vertex {vertex}: {data}")
 
     # implementation of depth first search
-    def dfs_util(self, v, visited):
+    def dfs_util_v1(self, v, visited):
         visited[v] = True
         print(self.vertex_data[v], end=' ')
 
@@ -49,6 +49,20 @@ class Graph:
                 if self.adj_matrix[current_vertex][i] == 1 and not visited[i]:
                     queue.append(i)
                     visited[i] = True
+
+    def dfs_util_v2(self, v, visited, parent):
+        visited[v] = True
+
+        for i in range(self.size):
+            if self.adj_matrix[v][i] == 1:
+                if not visited[i]:
+                    if self.dfs_util_v2(i, visited, v):
+                        return True
+                elif i != 1:
+                    return True
+        return False
+    
+
 
 g = Graph(7)
 
