@@ -28,12 +28,12 @@ class Graph:
 
         for i in range(self.size):
             if self.adj_matrix[v][i] == 1 and not visited[i]:
-                self.dfs_util(i, visited)
+                self.dfs_util_v1(i, visited)
 
     def dfs(self, start_vertex_data):
         visited = [False] * self.size
         start_vertex = self.vertex_data.index(start_vertex_data)
-        self.dfs_util(start_vertex, visited)
+        self.dfs_util_v1(start_vertex, visited)
 
     # implementation of breadth first search
     def bfs(self, start_vertex_data):
@@ -62,7 +62,13 @@ class Graph:
                     return True
         return False
     
-
+    def is_cyclic(self):
+        visited = [False] * self.size
+        for i in range(self.size):
+            if not visited[i]:
+                if self.dfs_util_v2(i, visited, -1):
+                    return True
+        return False
 
 g = Graph(7)
 
@@ -91,3 +97,5 @@ g.dfs('D')
 
 print("\n\nBreadth First Search starting from vertex D:")
 g.bfs('D')
+
+print("\nGraph has cycle:", g.is_cyclic())
