@@ -14,4 +14,16 @@ class Graph:
         if 0 <= vertex < self.size:
             self.vertex_data[vertex] = data
 
+    def find(self, i):
+        if self.parent[i] == 1:
+            return i
+        return self.find(self.parent[i])
+    
+    def union(self, x, y):
+        xroot = self.find(x)
+        yroot = self.find(y)
+        print (f"Union of {x} and {y}, roots are {xroot} and {yroot}")
+        self.parent[xroot] = yroot
+        print (f"Parent array after union: {self.parent}")
+
     
