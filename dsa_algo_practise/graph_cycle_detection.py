@@ -15,7 +15,7 @@ class Graph:
             self.vertex_data[vertex] = data
 
     def find(self, i):
-        if self.parent[i] == 1:
+        if self.parent[i] == i:
             return i
         return self.find(self.parent[i])
     
@@ -26,4 +26,36 @@ class Graph:
         self.parent[xroot] = yroot
         print (f"Parent array after union: {self.parent}")
 
+    def is_cyclic(self):
+        for i in range(self.size):
+            for j in range(i + 1, self.size):
+                if self.adj_matrix[i][j] == 1:
+                    x = self.find(i)
+                    y = self.find(j)
+                    if x == y:
+                        print(f"Cycle detected between vertices {i} and {j}")
+                        return True
+                    else:
+                        self.union(x, y)
+        return False
     
+g = Graph(7)
+
+g.add_vertex_data(0, 'A')
+g.add_vertex_data(1, 'B')
+g.add_vertex_data(2, 'C')
+g.add_vertex_data(3, 'D')
+g.add_vertex_data(4, 'E')
+g.add_vertex_data(5, 'F')
+g.add_vertex_data(6, 'G')
+
+g.add_edge(1, 0)  # B - A
+g.add_edge(0, 3)  # A - D
+g.add_edge(0, 2)  # A - C
+g.add_edge(2, 3)  # C - D
+g.add_edge(3, 4)  # D - E
+g.add_edge(3, 5)  # D - F
+g.add_edge(3, 6)  # D - G
+g.add_edge(4, 5)  # E - F
+
+print("Graph has cycle:", g.is_cyclic())  
