@@ -8,4 +8,8 @@ class Graph:
         if 0 <= u < self.size and 0 <= v < self.size:
             self.adj_matrix[u][v] = weight
 
-     
+    def add_vertex_data(self, vertex, data):
+        if 0 <= vertex < self.size:
+            self.vertex_data[vertex] = data
+
+    
