@@ -43,3 +43,9 @@ g.add_edge(0, 4, 5)  # A -> E, weight 5
 g.add_edge(4, 2, 3)  # E -> C, weight 3
 g.add_edge(1, 2, -4) # B -> C, weight -4
 g.add_edge(4, 1, 2)  # E -> B, weight 2
+
+# Running the Bellman-Ford algorithm from D to all vertices
+print("\nThe Bellman-Ford Algorithm starting from vertex D:")
+distances = g.bellman_ford('D')
+for i, d in enumerate(distances):
+    print(f"Distance from D to {g.vertex_data[i]}: {d}")
