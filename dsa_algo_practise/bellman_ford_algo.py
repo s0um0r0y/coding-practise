@@ -12,4 +12,18 @@ class Graph:
         if 0 <= vertex < self.size:
             self.vertex_data[vertex] = data
 
+    def bellman_ford(self, start_vertex_data):
+        start_vertex = self.vertex_data.index(start_vertex_data)
+        distances = [float('inf')] * self.size
+        distances[start_vertex] = 0
+
+        for i in range(self.size - 1):
+            for u in range(self.size):
+                for v in range(self.size):
+                    if self.adj_matrix[u][v] != 0:
+                        if distances[u] + self.adj_matrix[u][v] < distances[v]:
+                            distances[v] = distances[u] + self.adj_matrix[u][v]
+                            print(f"Relaxing edge {self.vertex_data[u]}-{self.vertex_data[v]}, Updated distance to {self.vertex_data[v]}: {distances[v]}") 
+        return distances
     
+g = Graph(5)
