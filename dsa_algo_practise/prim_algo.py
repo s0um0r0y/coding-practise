@@ -13,4 +13,6 @@ class Graph:
         if 0<= vertex < self.size:
             self.vertex_data[vertex] = data
 
-    
+    def prims_algorithm(self):
+        in_mst = [False] * self.size
+        
