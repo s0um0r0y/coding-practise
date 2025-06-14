@@ -15,4 +15,6 @@ class Graph:
 
     def prims_algorithm(self):
         in_mst = [False] * self.size
+        key_values = [float('inf')] * self.size
+        parent
         
