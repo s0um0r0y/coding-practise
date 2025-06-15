@@ -31,4 +31,30 @@ class Graph:
                     key_values[v] = self.adj_matrix[u][v]
                     parents[v] =u
 
-    
+g = Graph(8)
+
+g.add_vertex_data(0, 'A')
+g.add_vertex_data(1, 'B')
+g.add_vertex_data(2, 'C')
+g.add_vertex_data(3, 'D')
+g.add_vertex_data(4, 'E')
+g.add_vertex_data(5, 'F')
+g.add_vertex_data(6, 'G')
+g.add_vertex_data(7, 'H')
+
+g.add_edges(0, 1, 4)  # A - B
+g.add_edges(0, 3, 3)  # A - D
+g.add_edges(1, 2, 3)  # B - C
+g.add_edges(1, 3, 5)  # B - D
+g.add_edges(1, 4, 6)  # B - E
+g.add_edges(2, 4, 4)  # C - E
+g.add_edges(2, 7, 2)  # C - H
+g.add_edges(3, 4, 7)  # D - E
+g.add_edges(3, 5, 4)  # D - F
+g.add_edges(4, 5, 5)  # E - F
+g.add_edges(4, 6, 3)  # E - G
+g.add_edges(5, 6, 7)  # F - G
+g.add_edges(6, 7, 5)  # G - H
+
+print("Prim's Algorithm MST:")
+g.prims_algorithm()
