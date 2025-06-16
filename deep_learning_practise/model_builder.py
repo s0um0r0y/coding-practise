@@ -34,4 +34,17 @@ class TinyVGG(nn.Module):
             nn.MaxPool2d(kernel_size=2,
                          stride=2)
         )
+        self.conv_block_2 = nn.Sequential(
+            nn.Conv2d(hidden_units,
+                      hidden_units,
+                      kernel_size=3,
+                      padding=0),
+            nn.ReLU(),
+            nn.Conv2d(hidden_units,
+                      hidden_units,
+                      kernel_size=3,
+                      padding=0),
+            nn.ReLU(),
+            nn.MaxPool2d(2)
+        )
         
