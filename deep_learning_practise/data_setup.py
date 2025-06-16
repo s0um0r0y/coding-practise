@@ -55,5 +55,3 @@ def create_dataloaders(
                                  pin_memory=True)
     
     return train_dataloader, test_dataloader, class_names
-
-  
