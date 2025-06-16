@@ -47,4 +47,15 @@ class TinyVGG(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(2)
         )
-        
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(in_features=hidden_units*13*13,
+                      out_features=output_shape)
+        )
+
+    def forward(self, x: torch.Tensor):
+        x = self.conv_block_1(x)
+        x = self.conv_block_2(x)
+        x = self.classifier(x)
+        return x
+    
