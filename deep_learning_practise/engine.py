@@ -101,3 +101,10 @@ def train(model: torch.nn.Module,
                     train_acc: [0.3945, 0.3945],
                     test_loss: [1.2641, 1.5706],
                     test_acc: [0.3400, 0.2973]} '''
+    # creat empty results dictionary
+    results = {"train_loss": [],
+               "train_acc": [],
+               "test_loss": [],
+               "test_acc": []}
+    
+    # loop throough training and testing step
