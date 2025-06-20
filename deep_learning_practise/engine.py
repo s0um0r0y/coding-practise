@@ -63,6 +63,56 @@ def train_step(model: torch.nn.Module,
     train_acc = train_acc /len(dataloader)
     return train_loss, train_acc
 
+def test_step(model: torch.nn.Module,
+            dataloader: torch.utils.data.DataLoader,
+            loss_fn: torch.nn.Module,
+            device: torch.device) -> Tuple[float, float]:
+        """Tests a PyTorch model for a single epoch.
+
+    Turns a target PyTorch model to "eval" mode and then performs
+    a forward pass on a testing dataset.
+
+    Args:
+        model: A PyTorch model to be tested.
+        dataloader: A DataLoader instance for the model to be tested on.
+        loss_fn: A PyTorch loss function to calculate loss on the test data.
+        device: A target device to compute on (e.g. "cuda" or "cpu").
+
+    Returns:
+        A tuple of testing loss and testing accuracy metrics.
+        In the form (test_loss, test_accuracy). For example:
+
+        (0.0223, 0.8985)
+    """
+        # put model in eval mode
+        model.eval()
+
+        # setup test loss and testing accuracy values
+        test_loss, test_acc = 0, 0
+
+        # turn on inference context manager
+        with torch.inference_mode():
+             # Loop through DataLoader batches
+            for batch, (X, y) in enumerate(dataloader):
+                # send data to target device
+                X, y = X.to(device), y.to(device)
+
+                # 1. forward passs
+                test_pred_logits = model(X)
+
+                # 2. calculate the acc + loss
+                loss = loss_fn(test_pred_logits, y)
+                test_loss += loss.item()
+
+                # calculate and accumulate loss
+                test_pred_labels = test_pred_logits.argmax(diim=1)
+                test_acc += ((test_pred_labels == y).sum().item()/len(test_pred_labels))
+
+        # adjust metrics to get average loss and accuracy
+        test_loss = test_loss / len(dataloader)
+        test_acc = test_acc / len(dataloader)
+        return test_loss, test_acc
+
 def train(model: torch.nn.Module,
           train_dataloader: torch.utils.data.DataLoader,
           test_dataloader: torch.utils.data.DataLoader,
@@ -114,4 +164,7 @@ def train(model: torch.nn.Module,
                                            loss_fn=loss_fn,
                                            optimizer=optimizer,
                                            device=device)
-        test_loss, test_acc = test_step(model)
+        test_loss, test_acc = test_step(model=model,
+                                        dataloader=test_dataloader,
+                                        loss_fn=loss_fn,
+                                        device=device)
