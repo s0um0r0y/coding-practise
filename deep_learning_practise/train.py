@@ -22,3 +22,18 @@ data_transforms = transforms.Compose([
     transforms.Resize((64, 64)),
     transforms.ToTensor()
 ])
+
+# create Dataloader
+train_dataloader, test_dataloader = data_setup.create_dataloaders(
+    train_dir=train_dir,
+    test_dir=test_dir,
+    transform=data_transforms,
+    batch_size=BATCH_SIZE
+)
+
+# create model
+model = model_builder.TinyVGG(
+    input_shape=3,
+    hidden_units=HIDDEN_UNITS,
+    output_shape=len(class_names)
+)
