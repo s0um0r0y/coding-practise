@@ -17,3 +17,8 @@ test_dir = "data/pizza_steak_sushi/test"
 # Setup target device
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
+# create transforms
+data_transforms = transforms.Compose([
+    transforms.Resize((64, 64)),
+    transforms.ToTensor()
+])
