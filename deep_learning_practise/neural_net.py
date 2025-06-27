@@ -35,3 +35,13 @@ class NeuralNetwork:
         self.bias_output += np.sum(output_delta, axis=0, keepdims=True) * learning_rate
         self.weights_input_hidden += np.dot(X.T, hidden_delta) * learning_rate
         self.bias_hidden += np.sum(hidden_delta, axis=0, keepdims=True) * learning_rate
+
+    def train(self, X, y, epochs, learning_rate) -> None:
+        for epoch in range(epochs):
+            output = self.feedforward(X)
+            self.backward(X, y, learning_rate)
+            if epoch % 4000 == 0:
+                loss = np.mean(np.square(y-output))
+                print(f"Epoch {epoch}, Loss: {loss}")
+
+    
