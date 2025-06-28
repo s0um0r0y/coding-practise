@@ -42,6 +42,15 @@ class NeuralNetwork:
             self.backward(X, y, learning_rate)
             if epoch % 4000 == 0:
                 loss = np.mean(np.square(y-output))
-                print(f"Epoch {epoch}, Loss: {loss}")
+                print(f"Epoch: {epoch}, Loss: {loss}")
 
-    
+if __name__ == "__main__":
+    X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+    y = np.array([[0], [1], [1], [0]])
+
+    nn = NeuralNetwork(input_size=2, hidden_size=4, output_size=1)
+    nn.train(X, y, epochs=10000, learning_rate=0.1)
+
+    output = nn.feedforward(X)
+    print("Predictions after training:")
+    print(output)
