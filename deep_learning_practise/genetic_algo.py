@@ -25,4 +25,18 @@ def genetic_algorithm(population, fitness_func, n_generation=100, mutation_rate=
             population = np.array(next_generation)
         return population[0]
     
-    
+# Parameters
+population_size = 10
+dimension = 5
+n_generations = 50
+mutation_rate = 0.05
+
+# initialize population
+population = generate_population(population_size, dimension)
+
+# run genetic algorithm
+best_individual = genetic_algorithm(population, fitness_function, n_generations, mutation_rate)
+
+# Output the best individual and its fitness
+print("Best individual:", best_individual)
+print("Best fitness:", -fitness_function(best_individual))
